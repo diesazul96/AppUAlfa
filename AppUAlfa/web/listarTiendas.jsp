@@ -13,16 +13,15 @@
         <script type="text/javascript" src="listarTiendasAjax.js"></script>
         <link href="styles.css" rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>Nuestras Tiendas</title>
     </head>
     <body>
         <img src="tiendas_bg.jpg" class="background">
         <div id="div"></div>
-        <form>
-            <div class="prueba">
-                    
-            </div>
-        </form>
-    
+        
+        <button type="button" onclick="prueba()">Click Me!</button>
+        <div id="containerP" class="container-fluid"></div>
     </body>
 </html>
