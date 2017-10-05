@@ -18,6 +18,11 @@
     <body>
         <img src="tiendas_bg.jpg" class="background">
         <div id="div"></div>
+        <form>
+            <div class="prueba">
+                    
+            </div>
+        </form>
     
     </body>
 </html>
