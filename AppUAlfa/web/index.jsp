@@ -83,9 +83,79 @@
 
             jQuery(document).ready(function () {
                 jQuery("#loader").fadeOut("slow");
+                check();
             });
 
+
+
+
+            var btnNotificacion = document.getElementById("buttonN"),
+                    btnPermiso = document.getElementById("buttonP")
+            titulo = "AppU-Mart",
+                    opciones = {
+                        icon: "Pictures/AppuMartLogo.png",
+                        body: "Gracias Por Aceptar Las Notificaciones"
+                    };
+
+            function permiso() {
+                Notification.requestPermission();
+                check();
+            }
+            ;
+
+            function mostrarNotificacion() {
+                if (Notification) {
+                    if (Notification.permission == "granted") {
+                        var n = new Notification(titulo, opciones);
+                        setTimeout(function () {
+                            n.close()
+                        }, 5000);
+                        
+                    } else if (Notification.permission == "default") {
+                        alert("Primero da los permisos de notificación");
+                    } else {
+                        alert("Bloqueaste los permisos de notificación");
+                    }
+                }
+            }
+            ;
+
+            function check() {
+                alert("Checking");
+                if (Notification.permission === "granted") {
+                    mostrarNotificacion();
+                }
+                if (Notification.permission === "default") {
+                    alert("Sin Definir Notificaciones");
+                    permiso();
+                }
+                if (Notification.permission === "denied") {
+                    alert("Notificaciones Negadas");
+                }
+            }
+            ;
+
         </script>
+        <!--<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(["init", {
+                    appId: "e9e9af49-494f-4337-87cb-16705b3dbd57",
+                    autoRegister: false, /* Set to true to automatically prompt visitors */
+                    notifyButton: {
+                        enable: true /* Set to false to hide */
+                    }
+                }]);
+            var Usuario;
+            OneSignal.push(function () {
+                /* These examples are all valid */
+                OneSignal.getUserId(function (userId) {
+                    console.log("OneSignal User ID:", userId);
+                    alert(userId);
+                    // (Output) OneSignal User ID: 270a35cd-4dda-4b3f-b04e-41d7463a2316    
+                });
+            });
+        </script>-->
     </head>
     <body style="background-color: #F1F3F5;">
         <div id="loader"><img src="Pictures/AppuMartLogo.png" style="position: absolute; top:50%; left: 50%; margin-top: -150px; margin-left: -150px;"></div>
@@ -94,12 +164,19 @@
         <!--<div id="boton" style="vertical-align:middle;">Usuario</div>
         <div id="boton">Vendedor</div>    width:487px ; height: 121;  -->
         <div style="position: absolute; left: 10%; top: 12%;"><img src="Pictures/Usuario.png"  width="487px" height="121"></div>
-        
+
         <div style="margin-top: 17%;">
             <a href="http://localhost:8080/AppuMart/loginUsuario.jsp"><div class="avatar" style="left: 15%; vertical-align: middle;"></div></a>
             <a href="http://localhost:8080/AppuMart/loginVendedor.jsp"><div class="avatar2" style="right: 15%; vertical-align: middle;"></div></a>
             <center><div style="position: relative; top: -50px"><img src="Pictures/AppuMartLogo.png"></div></center>
         </div>
         <div style="position: absolute; right: 10%; bottom: 12%"><img src="Pictures/Vendedor.png" width="487px" height="121"></div>
+
+        <!--<button id="buttonP" onclick="permiso()">Dar Permisos</button>  
+        <button id="buttonN" onclick="mostrarNotificacion()">Lanzar notificación</button>  
+         <button id="buttonC" onclick="check()">Check Notificación</button>  -->
+
+
+
     </body>
 </html>
