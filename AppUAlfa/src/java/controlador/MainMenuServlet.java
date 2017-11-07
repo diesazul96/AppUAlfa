@@ -115,14 +115,6 @@ public class MainMenuServlet extends HttpServlet {
 
                     }
 
-                    //Envia Precio y cantidad
-//                    String x = Mateo.PrecioTotal(CarroSesion);
-//                    JSONObject total = new JSONObject();
-//
-//                    total.put("Total", x);
-//
-//                    array.put(total);
-
                     JSONObject fin = new JSONObject();
                     fin.put("Productos", array);
                     out.print(fin);

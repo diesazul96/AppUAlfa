@@ -23,6 +23,7 @@ public class CarritoDAO {
 
     private Connection conexion;
     private CarritoVO carritoVO = new CarritoVO();
+    
 
     public CarritoDAO() {
         Conexion db = Conexion.getConexion();
@@ -77,8 +78,9 @@ public class CarritoDAO {
                     carritoVO.agregarProducto(prod);
                     b = true;
                     return carritoVO.getProductos();
-                } else {
+                } else if(this.carritoVO.getProductos()!=null) {
                     int i = 0;
+                    int a= 0;
                     for (i = 0; i < carritoVO.getProductos().size(); i++) {
                         //Aumenta la cantidad del producto ya ingresado
                         if (producto.get(0).equals(carritoVO.getProductos().get(i).getNombre())) {
@@ -86,11 +88,13 @@ public class CarritoDAO {
                             int cant2 = (int) producto.get(2);
                             carritoVO.getProductos().get(i).setCantidad(cant + cant2);
 
+                        }else{
+                        a++;
                         }
 
                     }
 
-                    if (i == carritoVO.getProductos().size()) {
+                    if (a == carritoVO.getProductos().size()) {
                         
                         while (rs.next()) {
 

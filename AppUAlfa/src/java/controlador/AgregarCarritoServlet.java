@@ -83,10 +83,14 @@ public class AgregarCarritoServlet extends HttpServlet {
             
 
             
-            
+            System.out.println(request.getParameter("nombre"));
             String nombre= request.getParameter("nombre");
             String tienda= request.getParameter("tienda");
+            System.out.println(request.getParameter("cantidad"));
             int cantidad= Integer.parseInt(request.getParameter("cantidad"));
+            
+            
+            
             String P = "";
             P=request.getParameter("opcion");
             
