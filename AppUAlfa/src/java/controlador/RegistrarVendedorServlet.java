@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import vo.VendedorVO;
 
@@ -26,6 +27,9 @@ public class RegistrarVendedorServlet extends HttpServlet {
     private VendedorVO vo;
     private JSONObject json;
     private EnviarMail sender;
+    private String correo;
+    private String celular;
+    HttpSession session;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,9 +59,8 @@ public class RegistrarVendedorServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             System.out.println("Entre al geeeeeeeeeeeeeeeeeet");
-            
 
             if (request.getParameter("codigo") != null) {
                 System.out.println("I got the coooooode");
@@ -65,6 +68,9 @@ public class RegistrarVendedorServlet extends HttpServlet {
                 if (request.getParameter("codigo").equals(sender.getCod())) {
                     dao.insertar(vo);
                     json.put("registro", "ok");
+                    session.setAttribute("correo", correo);
+                    session.setAttribute("celular", celular);
+
                 } else {
                     json.put("registro", "fail");
 
@@ -73,6 +79,8 @@ public class RegistrarVendedorServlet extends HttpServlet {
             }
 
             out.print(json);
+        } catch (Exception e) {
+
         }
     }
 
@@ -90,24 +98,33 @@ public class RegistrarVendedorServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             System.out.println("Entre al servleeeeeeeeeeeeet");
+            
             json = new JSONObject();
             dao = new VendedorDAO();
-            String correo = request.getParameter("correo");
-            String celular = request.getParameter("celular");
+            correo = request.getParameter("correo");
+            celular = request.getParameter("celular");
             String nombre = request.getParameter("nombre");
             String password = request.getParameter("password");
-            vo = new VendedorVO();
+            session = request.getSession();
+            session.setAttribute("correo", correo);
+            session.setAttribute("celular", celular);
+            vo = (VendedorVO) session.getAttribute("vendedor");
+
+            if (vo == null) {
+
+                vo = new VendedorVO();
+                session.setAttribute("vendedor", vo);
+
+            }
             vo.setCorreo(correo);
             vo.setCelular(celular);
             vo.setNombre(nombre);
             vo.setPassword(password);
             String array[] = correo.split("@");
-            System.out.println("parte 111111: " + array[0]);
-            System.out.println("parte 222222: " + array[1]);
 
             if (dao.buscar(vo)) {
                 json.put("existe", "si");
-            } else if (!array[1].equals("correo.usa.edu.co")) {
+            } else if (array.length == 1 || !array[1].equals("correo.usa.edu.co")) {
                 json.put("sergista", "no");
                 System.out.println("No es de la sergioooooooo");
 
@@ -119,23 +136,20 @@ public class RegistrarVendedorServlet extends HttpServlet {
                 sender = new EnviarMail();
                 sender.sendMail(correo);
                 //if (request.getParameter("codigo") != null) {
-                  //  System.out.println("I got the coooooode");
+                //  System.out.println("I got the coooooode");
 
-                    //if (request.getParameter("codigo").equals(sender.getCod())) {
-                      //  dao.insertar(vo);
-                        //json.put("registro", "ok");
-                    //} else {
-                      //  json.put("registro", "fail");
-
-                    //}
-
-                }
+                //if (request.getParameter("codigo").equals(sender.getCod())) {
+                //  dao.insertar(vo);
+                //json.put("registro", "ok");
+                //} else {
+                //  json.put("registro", "fail");
+                //}
+            }
             out.print(json);
 
-            }
-
         }
-    
+
+    }
 
     /**
      * Returns a short description of the servlet.

@@ -86,6 +86,53 @@
                 check();
             });
 
+            var btnNotificacion = document.getElementById("buttonN"),
+                    btnPermiso = document.getElementById("buttonP")
+            titulo = "AppU-Mart",
+                    opciones = {
+                        icon: "Pictures/AppuMartLogo.png",
+                        body: "Notificaciones Activas"
+                    };
+
+            function permiso() {
+                Notification.requestPermission();
+                alert("Cheking...");
+                check();
+            }
+            ;
+
+            function mostrarNotificacion() {
+                if (Notification) {
+                    if (Notification.permission == "granted") {
+                        var n = new Notification(titulo, opciones);
+                        setTimeout( function() { n.close() }, 10000)
+                    } else if (Notification.permission == "default") {
+                        alert("Primero da los permisos de notificación");
+                    } else {
+                        alert("Bloqueaste los permisos de notificación");
+                    }
+                }
+            }
+            ;
+
+            function check() {
+                if (Notification.permission == "granted") {
+                    alert("Notificaciones Activas");
+                    mostrarNotificacion();
+                }
+                if (Notification.permission == "default") {
+                    alert("Notificaciones Sin Responder");
+                    permiso();
+                }
+                if (Notification.permission == "denied") {
+                    alert("Notificicaciones Denegadas");
+                }
+            }
+
+
+
+
+
 
 
 
@@ -172,9 +219,9 @@
         </div>
         <div style="position: absolute; right: 10%; bottom: 12%"><img src="Pictures/Vendedor.png" width="487px" height="121"></div>
 
+
         <!--<button id="buttonP" onclick="permiso()">Dar Permisos</button>  
-        <button id="buttonN" onclick="mostrarNotificacion()">Lanzar notificación</button>  
-         <button id="buttonC" onclick="check()">Check Notificación</button>  -->
+        <button id="buttonN"  onclick="mostrarNotificacion()()">Lanzar notificación</button>-->  
 
 
 

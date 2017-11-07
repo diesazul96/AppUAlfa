@@ -7,26 +7,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script>
         <script type="text/javascript" src="seleccionProductoAjax.js"></script>
+        <script type="text/javascript" src="InfoCarritoAjax.js"></script>
         <link href="StyleBody.css" rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Bienvenido a la tienda</title>
+        <title>Appumart</title>
         <style>
-
             @font-face
             {
                 font-family: 'font.ttf';
                 src: url('Pictures/font.ttf');
             }
-
             *{
                 font-family: 'font.ttf';
             }
             /*h2, h4{
                 font-family: 'Leckerli One', cursive;
             }*/
-
             .header {
                 width: 100%;
                 min-width: 100%;
@@ -38,7 +36,6 @@
                 background-position: center center;
                 filter:brightness(0.4);
             }
-
             .perfil{
                 /*display:block;*/
                 margin-left: 3%;
@@ -55,7 +52,6 @@
                 position: absolute;
                 top: 5%;
             }
-
             .perfil:hover{
                 /*display:block;*/
                 -moz-transform: rotate(360deg);
@@ -63,7 +59,8 @@
                 transform: rotate(360deg);
                 -moz-transition: all 1.5s; -webkit-transition: all 1.5s; transition: all 1.5s; 
             }
-
+            
+            
             .social {
                 position: fixed; /* Hacemos que la posición en pantalla sea fija para que siempre se muestre en pantalla*/
                 right: 40px; /* Establecemos la barra en la izquierda */
@@ -73,11 +70,9 @@
                 -webkit-transform: translate(40%, 40%);
                 z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
             }
-
             .social ul {
                 list-style: none;
             }
-
             .social ul li a {
                 display: inline-block;
                 color:#fff;
@@ -88,10 +83,7 @@
                 -o-transition:all 500ms ease;
                 transition:all 500ms ease; /* Establecemos una transición a todas las propiedades */
             }
-
             .social ul li .icon-carrito {background:#3b5998;  border-radius: 100%;} /* Establecemos los colores de cada red social, aprovechando su class */
-
-
             .social ul li a:hover {
                 background: #000; /* Cambiamos el fondo cuando el usuario pase el mouse */
                 /*padding: 10px 30px;*/ /* Hacemos mas grande el espacio cuando el usuario pase el mouse */
@@ -99,16 +91,14 @@
                 -webkit-transform: rotate(360deg);
                 transform: rotate(360deg);
                 -moz-transition: all 1.5s; -webkit-transition: all 1.5s; transition: all 1.5s; 
-
             }
-
-
+            
+            
             .titulo_uno{
                 font-size: 20px;
                 padding-top:40px;
                 text-align: center;
             }
-
             .descripcion2{
                 font-size: 15px;
                 margin-right: 40px;
@@ -116,11 +106,9 @@
                 color: #298cda;
                 text-align: center;
             }
-
             .titulo_uno:hover{
                 color: #F08426;
             }
-
             #loader{
                 position:absolute;/*agregamos una posición absoluta para que nos permita mover la capa en el espacio del navegador*/
                 top:0%;/*posicionamiento en Y */
@@ -130,9 +118,7 @@
                 width:100%; /* maximo ancho de la pantalla */
                 height:100%; /* maxima altura de la pantalla */
                 display:block; /* mostramos el layer */
-
             }
-
             #encabezado{
                 text-align: center; 
                 left: 51%; 
@@ -143,7 +129,6 @@
                 font-size: 80px; 
                 color: white;
             }
-
             .carro{
                 bottom: -4px;
                 left:0;
@@ -174,8 +159,19 @@
     </head>
 
     <body>
+        <% HttpSession mySession = request.getSession();
+            String correo = (String) mySession.getAttribute("correo");
+//            String correo = "diego@correo.usa.edu.co";
+        %>
+        
+        <% if(correo==null){%>
+            <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=index.jsp">
+        <%}%>
+        
+        
+        
+
         <div id="loader"><img src="Pictures/AppuMartLogo.png" style="position: absolute; top:50%; left: 50%; margin-top: -150px; margin-left: -150px;"></div>
-        <!--<img src="dulces_bg.jpg" class="background">-->
         <img src="Pictures/barraInf.png"  class="background">
         <!--<button class="cart-icon" data-toggle="modal" data-target="#myModal"><img src="carrito_wh.png" class="carritoIcon"></button><br>-->
 
@@ -214,7 +210,8 @@
                         </div>
                         <img src="Pictures/CarroMedio.png" class="carro">
                         <div class="modal-footer">
-                            <center><button type="button" class="btn btn-default" data-dismiss="modal" onclick = "location = 'InfoCarrito.jsp'">Check-out</button></center>
+                            <!--<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick = "location = 'InfoCarrito.jsp'">Check-out</button></center>-->
+                            <center><button type="button" class="btn btn-default" data-dismiss="modal" onclick = "main()">Check-out</button></center>
                         </div>
                     </div>
                 </div>
@@ -223,8 +220,15 @@
         <!-- Fin Modal-->
 
         <form>
-            <div id="prueba" style='position: absolute; top:20%; left: 43%'></div><br>
+            <div id="prueba" style='position: absolute; top:40%; left: 1%'></div><br>
             <div id="respuesta"></div>
+            <div id="c"></div>
         </form>
+        
+        
+        <button id="out" onclick='cerrarSesion()'>Cerrar Sesión</button>
+        
+        <a href="http://localhost:8080/AppuMart/editarComprador.jsp"><button>Editar comprador</button></a>
+        
     </body>
 </html>

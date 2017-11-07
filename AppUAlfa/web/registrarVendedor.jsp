@@ -52,17 +52,17 @@
             <p>Correo: </p><input type="text" id="correo"><br>
             <p>Celular: </p><input type="text" id="celular"><br>
             <p>Nombre: </p><input type="text" id="nombre"><br>
-            <p>Contraseña: </p><input type="password" id="password"><br>
-            <p>Confirmar contraseña: </p><input type="password" id="password2"><br><br>
+            <p>Contraseï¿½a: </p><input type="password" id="password"><br>
+            <p>Confirmar contraseï¿½a: </p><input type="password" id="password2"><br><br>
 
             <input type="button" class="btn" id="boton" value="Registrarme">
 
             <h1 id="conf1"></h1>
             <div id="oculto">
-                <p>Ingresa el código que enviamos a tu correo: </p><input type='text' class="btn" id ='codigo'>
+                <p>Ingresa el cï¿½digo que enviamos a tu correo: </p><input type='text' class="btn" id ='codigo'>
                 <input type='button' id ='confirmar' value ='confirmar'></div><br>
             <div id="oculto2">
-                <a href="http://localhost:8080/AppuMart/loginVendedor.jsp"><button><p>¡Registrarme!</p></button></a>
+                <a href="http://localhost:8080/AppuMart/loginVendedor.jsp"><button><p>ï¿½Registrarme!</p></button></a>
             </div>
 
 
@@ -80,24 +80,18 @@
             <form id="loginn" class="login-form">
                 <input id="correo" type="text" class="pass" placeholder="Correo"/>
                 <input id="nombre" type="text" class="pass" placeholder="Nombre"/>
-                <input id="password" type="password" placeholder="Contraseña" class="pass"/>
-                <input id="password2" type="password" placeholder="Confirma tu Contraseña" class="pass"/>
+                <input id="password" type="password" placeholder="Contraseï¿½a" class="pass"/>
+                <input id="password2" type="password" placeholder="Confirma tu Contraseï¿½a" class="pass"/>
                 <input id="celular" type="text" class="pass" placeholder="Celular"/>
                 <input type="submit" id="boton" class="btn" value="Sign Up"/>
 
 
                 <h1 id="conf1"></h1>
                 <div id="oculto">
-                    <p>Ingresa el código que enviamos a tu correo: </p><input type='text' class="btn" id ='codigo'>
+                    <p>Ingresa el cï¿½digo que enviamos a tu correo: </p><input type='text' class="btn" id ='codigo'>
                     <input type='button' id ='confirmar' value ='confirmar'></div><br>
                 <div id="oculto2">
-                    <a href="http://localhost:8080/AppuMart/loginVendedor.jsp"><button><p>¡Registrarme!</p></button></a>
+                    <a href="http://localhost:8080/AppuMart/loginVendedor.jsp"><button><p>ï¿½Registrarme!</p></button></a>
                 </div>
 
-            </form>
-            <div id="div"></div>
-        </div>
-    </div>
-    
-</body>
 </html>
