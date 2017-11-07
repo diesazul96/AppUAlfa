@@ -69,6 +69,7 @@ public class InfoCheckOutServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             ArrayList<ProductoVO> CarroSesion = (ArrayList) session.getAttribute("carrito");
+            String correoSesion = (String) session.getAttribute("correo");
             // ArrayList<ProductoVO> Carro = new Gson().fromJson(CarroSesion, ArrayList.class);
 
             Arreglo = CarroSesion;
@@ -101,10 +102,14 @@ public class InfoCheckOutServlet extends HttpServlet {
                     for (int i = 0; i < Arreglo.size(); i++) {
                         prod.add(Arreglo.get(i));
                     }
+                    
+                    String usuario="Cliente: "+mail.NombreComprador(correoSesion)+"\n";
 
                     
+                    cadena.add(usuario);
+                    
                     for (int j = 0; j < prod.size(); j++) {
-                        String orden = "\n"+"Producto: " + prod.get(j).getNombre() + "\n"+"Cantidad: " + Integer.toString(prod.get(j).getCantidad()) + "\n"+"Precio: " + Integer.toString(prod.get(j).getPrecio())+ "\n";
+                        String orden = "| "+"Producto: " + prod.get(j).getNombre() + " | "+"Cantidad: " + Integer.toString(prod.get(j).getCantidad()) + " | "+"Precio: " + Integer.toString(prod.get(j).getPrecio())+ " | ";
                         //String orden = "" + "Papitas" + "" + "2" + "" + "100";
                         System.out.println("PRODUCTO "+j+": "+orden);
                         cadena.add(orden);
