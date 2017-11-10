@@ -2,54 +2,85 @@ package dao;
 
 import java.util.Properties;
 import java.util.Random;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class EnviarMail {
 
     private String cod;
+    private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
+
+    private static final String SMTP_AUTH_USER = System.getenv("apikey");
+
+    private static final String SMTP_AUTH_PWD  = System.getenv("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");
 
     public EnviarMail() {
         this.cod = Integer.toString((int) Math.floor(Math.random() * (1000000 - 100000 + 1) + (100000)));
 
     }
 
-    public void sendMail(String toAdd) {
-        try {
-            // Propiedades de la conexión
-            Properties props = new Properties();
-            props.setProperty("mail.smtp.host", "smtp.gmail.com");
-            props.setProperty("mail.smtp.starttls.enable", "true");
-            props.setProperty("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.user", "chuidiang@gmail.com");
-            props.setProperty("mail.smtp.auth", "true");
+    public static void sendMail(String toEmail,String cod) throws Exception {
+        Properties props = new Properties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.host", SMTP_HOST_NAME);
+        props.put("mail.smtp.port", 587);
+        props.put("mail.smtp.auth", "true");
 
-            // Preparamos la sesion
-            Session session = Session.getDefaultInstance(props);
+        Authenticator auth = new SMTPAuthenticator();
+        System.out.println("aauuutth"+auth.toString());
+        Session mailSession = Session.getInstance(props, auth);
+        System.out.println("mail sessioooooon: "+mailSession.getProperty("mail.smtp.auth"));
 
-            // Construimos el mensaje
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("appumartsw@gmail.com"));
-            message.addRecipient(
-                    Message.RecipientType.TO,
-                    new InternetAddress(toAdd));
-            message.setSubject("Verificación de cuenta");
-            message.setText("Tu código: "+this.cod);
+        Transport transport = mailSession.getTransport();
 
-            // Lo enviamos.
-            Transport t = session.getTransport("smtp");
-            t.connect("appumartsw@gmail.com", "dondetusicompras");
-            t.sendMessage(message, message.getAllRecipients());
+        MimeMessage message = new MimeMessage(mailSession);
 
-            // Cierre.
-            t.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        Multipart multipart = new MimeMultipart("alternative");
+
+        BodyPart bodyPart = new MimeBodyPart();
+        bodyPart.setContent("Tu código:"+cod, "text/html");
+        multipart.addBodyPart(bodyPart);
+
+        message.setContent(multipart);
+
+        message.setFrom(new InternetAddress("appumartsw@gmail.com"));
+        message.setSubject("Confirmación de correo");
+
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+
+ 
+
+        transport.connect("apikey","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");
+
+        transport.sendMessage(message,
+
+        message.getRecipients(Message.RecipientType.TO));
+
+        transport.close();
+    }
+    private static class SMTPAuthenticator extends javax.mail.Authenticator {
+
+        public PasswordAuthentication getPasswordAuthentication() {
+
+            String username = SMTP_AUTH_USER;
+
+            String password = SMTP_AUTH_PWD;
+
+            return new PasswordAuthentication(username, password);
+
         }
+
     }
 
     public String getCod() {
