@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.Conexion;
@@ -142,4 +143,40 @@ public class UsuarioDAO {
 
         return res;
     }
+    
+    
+    public String NombreComprador(String correo){
+        
+        String query="select nombre from Usuarios where correo='"+correo+"'";
+        //String Correo="";
+        String comprador="";
+        
+        try {
+            
+            Statement st = this.conexion.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            
+            
+            while(rs.next()){
+            comprador=rs.getString(1);
+            System.out.println("comprador"+comprador);
+           
+                 
+            } 
+            return comprador;
+            
+            
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EnviarMail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+        return null;
+    
+    }
+    
 }

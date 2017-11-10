@@ -9,6 +9,9 @@ import dao.EnviarMail;
 import dao.VendedorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +32,7 @@ public class RegistrarVendedorServlet extends HttpServlet {
     private EnviarMail sender;
     private String correo;
     private String celular;
+    HttpSession session;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +65,6 @@ public class RegistrarVendedorServlet extends HttpServlet {
 
             System.out.println("Entre al geeeeeeeeeeeeeeeeeet");
 
-            HttpSession session = request.getSession();
             if (request.getParameter("codigo") != null) {
                 System.out.println("I got the coooooode");
 
@@ -69,7 +72,7 @@ public class RegistrarVendedorServlet extends HttpServlet {
                     dao.insertar(vo);
                     json.put("registro", "ok");
                     session.setAttribute("correo", correo);
-                    session.setAttribute("celular",celular);
+                    session.setAttribute("celular", celular);
 
                 } else {
                     json.put("registro", "fail");
@@ -79,6 +82,8 @@ public class RegistrarVendedorServlet extends HttpServlet {
             }
 
             out.print(json);
+        } catch (Exception e) {
+
         }
     }
 
@@ -96,13 +101,24 @@ public class RegistrarVendedorServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             System.out.println("Entre al servleeeeeeeeeeeeet");
+            
             json = new JSONObject();
             dao = new VendedorDAO();
             correo = request.getParameter("correo");
             celular = request.getParameter("celular");
             String nombre = request.getParameter("nombre");
             String password = request.getParameter("password");
-            vo = new VendedorVO();
+            session = request.getSession();
+            session.setAttribute("correo", correo);
+            session.setAttribute("celular", celular);
+            vo = (VendedorVO) session.getAttribute("vendedor");
+
+            if (vo == null) {
+
+                vo = new VendedorVO();
+                session.setAttribute("vendedor", vo);
+
+            }
             vo.setCorreo(correo);
             vo.setCelular(celular);
             vo.setNombre(nombre);
@@ -121,7 +137,9 @@ public class RegistrarVendedorServlet extends HttpServlet {
                 json.put("sergista", "si");
 
                 sender = new EnviarMail();
-                sender.sendMail(correo);
+                String cod = sender.getCod();
+                //session.setAttribute("codigo", cod);
+                EnviarMail.sendMail(correo,cod);
                 //if (request.getParameter("codigo") != null) {
                 //  System.out.println("I got the coooooode");
 
@@ -134,6 +152,10 @@ public class RegistrarVendedorServlet extends HttpServlet {
             }
             out.print(json);
 
+        } catch (MessagingException ex) {
+            Logger.getLogger(RegistrarVendedorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarVendedorServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

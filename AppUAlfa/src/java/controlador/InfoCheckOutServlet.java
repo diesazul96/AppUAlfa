@@ -9,9 +9,13 @@ import com.google.gson.Gson;
 import dao.CarritoDAO;
 import dao.EnviarMail;
 import dao.ProductoDAO;
+import dao.TiendaDAO;
+import dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,9 +66,8 @@ public class InfoCheckOutServlet extends HttpServlet {
             CarritoDAO carrito = new CarritoDAO();
             ProductoVO productos = new ProductoVO();
             ArrayList<ProductoVO> Arreglo = new ArrayList();
-            JSONArray array = new JSONArray();
-            JSONObject coment = new JSONObject();
-            JSONObject fin = new JSONObject();
+            UsuarioDAO user = new UsuarioDAO();
+            TiendaDAO tienda = new TiendaDAO();
             EnviarMail mail = new EnviarMail();
             HttpSession session = request.getSession();
             
@@ -103,7 +106,7 @@ public class InfoCheckOutServlet extends HttpServlet {
                         prod.add(Arreglo.get(i));
                     }
                     
-                    String usuario="Cliente: "+mail.NombreComprador(correoSesion)+"\n";
+                    String usuario="Cliente: "+user.NombreComprador(correoSesion)+"\n";
 
                     
                     cadena.add(usuario);
@@ -118,7 +121,7 @@ public class InfoCheckOutServlet extends HttpServlet {
                     cadena.add(comentario);
                     
                     System.out.println("idtienda:"+prod.get(0).getTienda());
-                    correo = mail.CorreoTienda(prod.get(0).getTienda());
+                    correo = tienda.CorreoTienda(prod.get(0).getTienda());
                     //correo = mail.CorreoTienda(1);
                     System.out.println("Correo:"+correo);
                     String pedido="";
@@ -130,13 +133,15 @@ public class InfoCheckOutServlet extends HttpServlet {
                     
                     String map = "<p>"+pedido+"</p><img src='https://maps.googleapis.com/maps/api/staticmap?center="+request.getParameter("latitud")+","+request.getParameter("longitud")+"&zoom=15&size=400x400&maptype=roadmap\n" +
 "&markers=color:red%7Clabel:C%7C"+request.getParameter("latitud")+","+request.getParameter("longitud")+"&key=AIzaSyAJOwdex9jqp6DZ-klv-NlBxoAmwaCyKt8'/>";
-                    mail.sendCheckOut(correo,map);
+                    mail.sendMailCheckout(correo,map);
                     
                     session.setAttribute("carrito", null);
                     System.out.println("-------------CORREO ENVIADO-------------");
                 
             }
 
+        } catch (Exception ex) {
+            Logger.getLogger(InfoCheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
