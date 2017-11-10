@@ -21,9 +21,9 @@ public class EnviarMail {
     private String cod;
     private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
 
-    private static final String SMTP_AUTH_USER = System.getenv("");
+    private static final String SMTP_AUTH_USER = System.getenv("SENDGRID_USERNAME");
 
-    private static final String SMTP_AUTH_PWD  = System.getenv("");
+    private static final String SMTP_AUTH_PWD  = System.getenv("SENDGRID_PASSWORD");
 
     public EnviarMail() {
         this.cod = Integer.toString((int) Math.floor(Math.random() * (1000000 - 100000 + 1) + (100000)));
@@ -61,7 +61,7 @@ public class EnviarMail {
 
  
 
-        transport.connect("","");
+        transport.connect(SMTP_AUTH_USER,SMTP_AUTH_PWD);
 
         transport.sendMessage(message,
 
