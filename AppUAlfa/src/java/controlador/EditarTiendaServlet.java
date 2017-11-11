@@ -1,47 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controlador;
 
-import dao.UsuarioDAO;
+import dao.TiendaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.json.JSONObject;
-import vo.UsuarioVO;
+import vo.TiendaVO;
 
-
-public class LoginUsuarioServlet extends HttpServlet {
-    private UsuarioDAO usuario;
-   
+/**
+ *
+ * @author ayoro
+ */
+public class EditarTiendaServlet extends HttpServlet {
+    private TiendaDAO tienda;
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            JSONObject json = new JSONObject();
-            this.usuario = new UsuarioDAO();
-            UsuarioVO user = new UsuarioVO();
-            String correo = request.getParameter("correo");
-            String password = request.getParameter("password");
-            user.setCorreo(correo);
-            user.setPassword(password);
+            this.tienda = new TiendaDAO();
             
-            HttpSession session = request.getSession();
-            session.setAttribute("correo", correo);
+            System.out.println("HOLLAAAAA");
             
-
+            int opcion = Integer.parseInt(request.getParameter("opcion"));
+            String celular = request.getParameter("celular");
+            int id = this.tienda.obtenerId(celular);
             
-            if (!this.usuario.loggear(user)) {
-                json.put("confirmacion","NAK");
-                System.out.println("No se pudo loggear");
-            } else {
-                json.put("confirmacion","ACK");
-                System.out.println("OOOOKKKKKKKKKKKK");
+            if (opcion == 1) {
+                String nombre = request.getParameter("nombre");
+                TiendaVO t = new TiendaVO();
+                t.setNombre(nombre);
+                t.setId(id);
+                this.tienda.editarNombre(t);
+            }else if(opcion == 2){
+                String fondo = request.getParameter("fondo");
+                TiendaVO t = new TiendaVO();
+                t.setIdFondo(fondo);
+                t.setId(id);
+                this.tienda.editarFondo(t);
             }
-
-            out.print(json);
         }
     }
 

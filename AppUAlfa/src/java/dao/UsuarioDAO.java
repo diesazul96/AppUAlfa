@@ -15,11 +15,13 @@ public class UsuarioDAO {
     public UsuarioDAO() {
         Conexion db = Conexion.getConexion();
         this.conexion = db.getConnection();
+        System.out.println("CONECTADITO");
     }
     
     public boolean insertar(UsuarioVO usuario) {
         boolean resultado = false;
         try {
+            System.out.println("entro al insetar");
             //1.Establecer la consulta
             String consulta = "INSERT INTO Usuarios VALUES(?,?,?,?,?)";
             //2. Crear el PreparedStament
@@ -43,17 +45,54 @@ public class UsuarioDAO {
     }
     
     
-    public boolean editar(UsuarioVO usuario) {
+    public boolean editarNombre(UsuarioVO usuario) {
         boolean result = false;
-        String query = "update Usuarios set Celular = ?, Nombre = ?, Correo = ?, Password= ? where Celular = ?";
+        String query = "update Usuarios set Nombre = ? where Correo = ?";
+        PreparedStatement preparedStmt = null;
+        try {
+            preparedStmt = this.conexion.prepareStatement(query);
+            preparedStmt.setString(1, usuario.getNombre());
+            preparedStmt.setString(2, usuario.getCorreo());
+            
+            if (preparedStmt.executeUpdate() > 0) {
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    
+    public boolean editarCelular(UsuarioVO usuario) {
+        boolean result = false;
+        String query = "update Usuarios set Celular = ? where Correo = ?";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = this.conexion.prepareStatement(query);
             preparedStmt.setString(1, usuario.getCelular());
-            preparedStmt.setString(2, usuario.getNombre());
-            preparedStmt.setString(3, usuario.getCorreo());
-            preparedStmt.setString(4, usuario.getPassword());
-            preparedStmt.setString(5, usuario.getCelular());
+            preparedStmt.setString(2, usuario.getCorreo());
+            
+            if (preparedStmt.executeUpdate() > 0) {
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    
+    public boolean editarContrasena(UsuarioVO usuario) {
+        boolean result = false;
+        String query = "update Usuarios set Contrasena = ? where Correo = ?";
+        PreparedStatement preparedStmt = null;
+        try {
+            preparedStmt = this.conexion.prepareStatement(query);
+            preparedStmt.setString(1, usuario.getPassword());
+            preparedStmt.setString(2, usuario.getCorreo());
             
             if (preparedStmt.executeUpdate() > 0) {
                 result = true;
@@ -68,11 +107,11 @@ public class UsuarioDAO {
     
     public boolean borrar(UsuarioVO usuario) {
         boolean result = false;
-        String query = "delete from Usuarios where Celular = ?";
+        String query = "delete from Usuarios where Correo = ?";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = this.conexion.prepareStatement(query);
-            preparedStmt.setString(1, usuario.getCelular());
+            preparedStmt.setString(1, usuario.getCorreo());
             result = preparedStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,6 +122,8 @@ public class UsuarioDAO {
     
     public boolean loggear(UsuarioVO usuario) {
 
+        System.out.println("LOGGEANDO");
+        
         boolean res = false;
         String query = "select * from Usuarios where Correo = ? and Contrasena = ?";
 
@@ -104,11 +145,4 @@ public class UsuarioDAO {
 
         return res;
     }
-    
-    
-    
-    
-    
-    
-    
 }

@@ -2,11 +2,14 @@ package vo;
 
 public class ProductoVO {
     
+    private String ID;
     private String categoria;
     private int precio;
     private String nombre;
     private int cantidad;
-
+    private String rutaImagen;
+    private int Tienda;
+    
     public String getCategoria() {
         return categoria;
     }
@@ -38,4 +41,30 @@ public class ProductoVO {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
+    public int getTienda() {
+        return Tienda;
+    }
+
+    public void setTienda(int Tienda) {
+        this.Tienda = Tienda;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+    
+    
 }

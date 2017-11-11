@@ -5,6 +5,14 @@ import java.util.ArrayList;
 public class CarritoVO {
     private UsuarioVO usuario;
     private ArrayList<ProductoVO> productos;
+    private static CarritoVO carrito;
+    
+    public static CarritoVO getCarrito(){
+        if (carrito == null) {
+            carrito = new CarritoVO();
+        }
+        return carrito;
+    }
 
     public CarritoVO() {
         this.productos = new ArrayList<ProductoVO>();
