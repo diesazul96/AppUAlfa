@@ -1,15 +1,16 @@
+<%@page import="vo.ProductoVO"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="seleccionProductoAjax.js"></script>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
-
-
-        <title id="xx"></title>
-
-
+        <script type="text/javascript" src="InfoCarritoAjax.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="InfoCarritoAjax.js"></script>
+        <script type="text/javascript" src="InfoCheckOut.js"></script>
+        <!--<script type="text/javascript" src="seleccionProductoAjax.js"></script>-->
+        <link href="StyleLogin.css" rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
+        <title>Tú Carrito</title>
         <style>
             @font-face
             {
@@ -182,66 +183,6 @@
                 /*onclick='this.value""'*/
             } 
 
-            /*Move Return Tiendas*/
-            .container {
-                /*width: 200px;
-                height: 200px;*/
-                position: relative;
-                z-index: 2000;
-                /*background-color: black;*/
-            }
-            .div-img {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .div-img.hidden {
-                overflow: hidden;
-            }
-            .div-img .img {
-
-                margin-left: auto;
-                margin-right: auto;
-                width: 100%;
-                background-color: #087eac;
-                transform: translate(0px, 0px);
-                -ms-transform: translate(0px, 0px);
-                -moz-transform: translate(0px, 0px);
-                -webkit-transform: translate(0px, 0px);
-                -o-transform: translate(0px, 0px);
-                -webkit-transition: all 500ms ease-in-out;
-                -moz-transition: all 500ms ease-in-out;
-                -ms-transition: all 500ms ease-in-out;
-                -o-transition: all 500ms ease-in-out;
-            }
-            .div-img .text {
-                position: relative;
-                z-index: -1;
-                display: block;
-                bottom: 80px;
-                width: 100%;
-                text-align: center;
-                color: black;
-            }
-            .div-img:hover .img {
-                transform: translate(0px, -100px);
-                -ms-transform: translate(0px, -100px);
-                -moz-transform: translate(0px, -100px);
-                -webkit-transform: translate(0px, -100px);
-                -o-transform: translate(0px, -100px);
-            }
-            /*.footer {
-                position: static;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                height: 80px;
-                background-color: #087eac;
-                border-radius: 15%;
-                color: white;
-                text-align: center;
-                margin-top: 50px;
-            }*/
-            /*Move Return*/
             /*Mensaje*/
             .tooltip {
                 position: relative;
@@ -282,82 +223,126 @@
                 opacity: 1;
             }
             /*Mensaje*/
-            /*Carrito*/
-            .social {
-                position: fixed; /* Hacemos que la posición en pantalla sea fija para que siempre se muestre en pantalla*/
-                right: 40px; /* Establecemos la barra en la izquierda */
-                top: 40%; /* Bajamos la barra 200px de arriba a abajo */
-                /*left: 95%;*/
-                transform: translate(40%, 40%); 
-                -webkit-transform: translate(40%, 40%);
-                z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
+        </style>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJOwdex9jqp6DZ-klv-NlBxoAmwaCyKt8&callback=initMap">
+        </script>
+        <style>
+            #map {
+                height: 200px;
+                width: 400px;
             }
-            .social ul {
-                list-style: none;
-            }
-            .social ul li a {
-                display: inline-block;
-                color:#fff;
-                background: none;
-                margin-right: 10px;
-                /*padding: 10px 15px;*/
-                text-decoration: none;
-                -webkit-transition:all 500ms ease;
-                -o-transition:all 500ms ease;
-                transition:all 500ms ease; /* Establecemos una transición a todas las propiedades */
-            }
-            .social ul li .icon-carrito {
-                background:#3b5998;  
-                border-radius: 100%;
-            } /* Establecemos los colores de cada red social, aprovechando su class */
-            .social ul li a:hover {
-                background: none; /* Cambiamos el fondo cuando el usuario pase el mouse */
-                /*padding: 10px 30px;*/ /* Hacemos mas grande el espacio cuando el usuario pase el mouse */
-                -moz-transform: rotate(360deg);
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg);
-                -moz-transition: all 1.5s; -webkit-transition: all 1.5s; transition: all 1.5s; 
-            }
-            /*Carrito*/
         </style>
         <script>
             jQuery(document).ready(function () {
                 jQuery("#loader").fadeOut("slow");
-            });
-            $(document).ready(function () {
-                $(window).scroll(function () {
-                    if ($('body').height() <= ($(window).height() + $(window).scrollTop())) {
-                        $('#na').show();
+                var Ancho = screen.width;
+                var Alto = screen.height;
+                alert(Ancho + " Y " + Alto);
+                //form1.submit();
+                
+    });
+
+            var btnNotificacion = document.getElementById("buttonN"),
+                    btnPermiso = document.getElementById("buttonP")
+            titulo = "Oder Checkout",
+                    opciones = {
+                        icon: "Pictures/checkout.png",
+                        body: "Se ha envaido un correo al vendedor, con la informacion de tu pedido..."
+                    };
+
+
+            function mostrarNotificacion() {
+                if (Notification) {
+                    if (Notification.permission == "granted") {
+                        var n = new Notification(titulo, opciones);
+                        setTimeout(function () {
+                            n.close()
+                        }, 10000)
+                    } else if (Notification.permission == "default") {
+                        alert("Primero da los permisos de notificación");
                     } else {
-                        $('#na').hide();
+                        alert("Bloqueaste los permisos de notificación");
                     }
-                });
-            });
+                }
+            }
+            ;
+
+            function check() {
+                if (Notification.permission == "granted") {
+                    alert("Notificaciones Activas");
+                    mostrarNotificacion();
+                }
+                if (Notification.permission == "default") {
+                alert("Notificaciones Sin Responder");
+                        permiso();
+                }
+                if (Notification.permission == "denied") {
+                alert("Notificicaciones Denegadas");
+                }
+            }
+            ;
+
+            function clear(element) {
+                element.value = '';
+            }
+            ;
+
         </script>
-    </head> 
+    </head>
     <body>
-        
-        <div class="social">
-            <ul>
-                <li>
-                    <a href="InfoCarrito2.jsp" target="_blank" onclick="main()"><img src="Pictures/Carrito.png" style="width: 100px; height: 100px"></a>
-                </li>
-            </ul>
-        </div>
-        
-        <!--(WebSite Centrado) -->
+        <% //HttpSession mySession = request.getSession();
+            //String correo = (String) mySession.getAttribute("correo");
+            //            String correo = "diego@correo.usa.edu.co";
+        %>
+
+        <%//if (correo == null) {%>
+        <!--<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=index.jsp">-->
+        <%//}%>
+
         <div class="main">
             <div>
-                <div id='Perfil'></div>
-                <center><div id="encabezado" class="TituloEmpresa"></div></center>
+                <div id='Perfil'><div class='perfil' style='background-image:-webkit-linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,0) 50%),url(Pictures/checkout.png); background-image:-moz-linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,0) 50%),url(Pictures/checkout.png); background-image:linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,0) 50%),url(Pictures/checkout.png); background-size: auto, 100%;'></div></div>
+                <center><div id="encabezado" class="TituloEmpresa">Checkout</div></center>
             </div>
-            
+
             <hr style="margin-bottom: 150px;">
+
+
+            <div class="row" id="carlos">
+            </div>
+
+            <form name="form1">
+                <center>
+                    <input class="submit" type="text" id="opcion" value="1" onclick="form1.submit()"  style="visibility:hidden"/><br>
+                    <p id="ack"></p>
+                    <!--<input class="btn" type="submit" id="InfoCarro" value="Actualizar"/><br>-->
+                </center>
+            </form>
+
+            <form name="form2">
+                <center>
+                    <div id="map"></div><br>
+                    <textarea rows="4" cols="50" name="comment" id="comment" placeholder="Ingresa Los Comentarios Del Pedido Aqui..."></textarea><br>
+                    <button onclick="mifuncion()">Confirmar</button>
+                    <script>
+
+                    </script>
+                </center>
+
+            </form>
+
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB78-OGRg5rcLtUs9caqE4lQVIlw-D7zA4&callback=initMap"></script>
+
+
+
+
+
+
 
             <div class="row" id="div">
                 <!-- END GRID -->
             </div>
-            <p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas productos por mostrar <i class="fa fa-exclamation-circle"></i></p>
 
             <hr style="margin-top: 20px">
 
@@ -370,7 +355,7 @@
             </div>
 
         </div>
-        <!--WebSite Fin -->
-</body>
+
+    </body>
 </html>
 

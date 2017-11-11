@@ -63,44 +63,6 @@ function cli(id) {
     //}
 }
 
-function main() {
-    var opcion = "1";
-    console.log("Entro a funcion main");
-
-
-    $.ajax({
-        url: 'MainMenuServlet',
-        type: 'GET',
-        data: {opcion: opcion},
-        dataType: 'json',
-        success: function (data) {
-
-            var i = 0;
-            for (i = 0; i < data.Productos.length; i++) {
-                console.log(data.Productos[i].nombre);
-                console.log(data.Productos[i].precio);
-                $('#carlos').append(
-                        //"<a href = 'seleccionProducto.jsp'><button class='btn' onclick='sendName(" + data.Productos[i].nombre + ")'>\n\"",
-                        "<p>" + data.Productos[i].nombre + "</p><p>" + data.Productos[i].cantidad + "</p><p>" + data.Productos[i].precio + "</p><br>",
-                        "<form>",
-                        "<input type='text' id='opcion' value='2' style='display: none'>",
-                        "<input type='text' id='idprod' value='" + data.Productos[i].ID + "' style='display: none'>",
-                        "<input type='submit'>",
-                        "</form>"
-
-                        );
-
-            }
-            // $("#respuesta").append("<b>Se agregó el producto </b>"+data.nombre+" <b>satisfactoriamente</b>");
-        }
-    });
-
-    location = 'InfoCarrito.jsp';
-}
-
-
-
-
 $(document).ready(function () {
 
     $.ajax({
@@ -115,8 +77,6 @@ $(document).ready(function () {
             $("#xx").append(data.empresa);
             $("#Perfil").append("<div class='perfil' style='background-image:-webkit-linear-gradient(top left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 50%),url(Pictures/" + data.logo + "); background-image:-moz-linear-gradient(top left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 50%),url(Pictures/" + data.logo + "); background-image:linear-gradient(top left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 50%),url(Pictures/" + data.logo + "); background-size: auto, 100%;'></div>");
             for (var i = 0; i < data.arreglo.length; i++) {
-                console.log(data.arreglo[i].nombre);
-                console.log(data.arreglo[i].precio);
                 console.log("Imagen: " + data.arreglo[i].ruta);
                 console.log("Nombre: " + data.arreglo[i].nombre);
                 console.log("Precio: " + data.arreglo[i].precio);
