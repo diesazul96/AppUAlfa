@@ -62,6 +62,5 @@
     </center>
 
     <img src="Pictures/Partner.png"  class="background" style="filter:brightness(1); width: 30% ; height: 15%; left: 49.5%; top: 80%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); position: absolute;">
-
 </body>
 </html>

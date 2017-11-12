@@ -5,8 +5,8 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="listarTiendasAjax.js"></script>
         <title>Tiendas AppuMart</title>
-        
-        
+
+
         <style>
             @font-face
             {
@@ -19,11 +19,17 @@
                 font-family: 'carrito.ttf';
             }
 
-            body {
+            /*body {
                 background-color: #f1f1f1;
                 padding: 10px;
                 font-family: Arial;
-            }
+            }*/
+
+            /*body {
+                background-color: rgb(147, 93, 140);
+                background-image: url(images/overlay.png), linear-gradient(45deg, rgb(227, 118, 130) 15%, rgb(95, 77, 147) 85%);
+                
+            }*/
 
             /* Center website */
             .main {
@@ -103,7 +109,7 @@
             .puntuacion{
                 color: #298cda;
                 font-size: 15px
-                    
+
             }
         </style>
     </head>
@@ -211,54 +217,54 @@
                         </div>
                     </div>
                 </div>-->
-                <!-- END GRID -->
-            </div>
-
-            <!-- END MAIN -->
+            <!-- END GRID -->
         </div>
 
-        <script>
-            filterSelection("all")
-            function filterSelection(c) {
-                var x, i;
-                x = document.getElementsByClassName("column");
-                if (c == "all")
-                    c = "";
-                for (i = 0; i < x.length; i++) {
-                    w3RemoveClass(x[i], "show");
-                    if (x[i].className.indexOf(c) > -1)
-                        w3AddClass(x[i], "show");
+        <!-- END MAIN -->
+    </div>
+
+    <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("column");
+            if (c == "all")
+                c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1)
+                    w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {
+                    element.className += " " + arr2[i];
                 }
             }
+        }
 
-            function w3AddClass(element, name) {
-                var i, arr1, arr2;
-                arr1 = element.className.split(" ");
-                arr2 = name.split(" ");
-                for (i = 0; i < arr2.length; i++) {
-                    if (arr1.indexOf(arr2[i]) == -1) {
-                        element.className += " " + arr2[i];
-                    }
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
                 }
             }
-
-            function w3RemoveClass(element, name) {
-                var i, arr1, arr2;
-                arr1 = element.className.split(" ");
-                arr2 = name.split(" ");
-                for (i = 0; i < arr2.length; i++) {
-                    while (arr1.indexOf(arr2[i]) > -1) {
-                        arr1.splice(arr1.indexOf(arr2[i]), 1);
-                    }
-                }
-                element.className = arr1.join(" ");
-            }
-        </script>
+            element.className = arr1.join(" ");
+        }
+    </script>
 
 
-        <!--<div class="footer">
-          <p>Footer</p>
-        </div>-->
+    <!--<div class="footer">
+      <p>Footer</p>
+    </div>-->
 
-    </body>
+</body>
 </html>

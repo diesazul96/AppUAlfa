@@ -11,6 +11,24 @@
 
 
         <style>
+            @media screen and (max-width:560px) {
+                #res {
+                    width: 70%;
+                    margin: auto;
+                    float: none;
+                }
+                #encabezado{
+                    padding-top: 10px;
+                    padding-bottom: 20px;
+                }
+                #hc{
+                    margin-bottom: 50px;
+                }
+                #perfilres{
+                    float: none;
+                    margin: auto;
+                }
+            }
             @font-face
             {
                 font-family: 'carrito.ttf';
@@ -58,6 +76,10 @@
             .column {
                 float: left;
                 width: 33.33%;
+                /*width: 70%;
+                margin: auto;
+                float: none;*/
+
                 /*display: none;*/ /* Hide all elements by default */
             }
 
@@ -73,6 +95,7 @@
                 border-radius: 50px 50px 10px 10px;
                 background-color: white;
                 padding: 0px;
+                box-shadow: 2px 2px 5px #999;  /*ESTE*/
             }
             .content2 {
                 padding: 0 0 0 0;
@@ -101,12 +124,16 @@
             }
             .puntuacion{
                 color: #298cda;
-                font-size: 30px
+                font-size: 30px;
+                margin-top: 5px; /*ESTO*/
+                margin-bottom: 0px; /*ESTO*/
 
             }
             .empresa{
                 font-size: 25px;
                 color: black;
+                margin-top: 0px; /*ESTO*/
+                margin-bottom: 0px; /*ESTO*/
             }
             a:link   
             {   
@@ -336,7 +363,7 @@
         </script>
     </head> 
     <body>
-        
+
         <div class="social">
             <ul>
                 <li>
@@ -344,15 +371,15 @@
                 </li>
             </ul>
         </div>
-        
+
         <!--(WebSite Centrado) -->
         <div class="main">
             <div>
                 <div id='Perfil'></div>
                 <center><div id="encabezado" class="TituloEmpresa"></div></center>
             </div>
-            
-            <hr style="margin-bottom: 150px;">
+
+            <hr style="margin-bottom: 150px;" id="hc">
 
             <div class="row" id="div">
                 <!-- END GRID -->
@@ -371,6 +398,6 @@
 
         </div>
         <!--WebSite Fin -->
-</body>
+    </body>
 </html>
 
