@@ -106,7 +106,13 @@
             img {
                 border-radius: 5px 5px 0 0;
             }
-
+            .sin{
+                 border-radius: 3px;
+            }
+            .sin:hover{
+               /*box-shadow: 2px 2px 5px #000000;*/
+               color: #000000;
+            }
         </style>
     </head>
     <body>
@@ -144,7 +150,7 @@
                                     <input type="text" name="name" id="nombre"/>
                                 </div>
                                 <div class="field half" style="margin-bottom: 60px; margin-top: 52px;">
-                                    <input type="submit" value="Cambiar Nombre" class="special" id="bNombre"/>
+                                    <input type="submit" value="Cambiar Nombre" id="bNombre" style="background-color: #087eac; color: #ffffff"/>
                                 </div>
                             </form>
 
@@ -154,7 +160,7 @@
                                     <input type="text" name="fondo" id="fondo" placeholder="URL Imagen"/>
                                 </div>
                                 <div class="field half" style="margin-top: 35px;">
-                                    <input type="submit" value="Cambiar Logo" class="special" id="bFondo"/>
+                                    <input type="submit" value="Cambiar Logo" id="bFondo" style="background-color: #e30020; color: #ffffff"/>
                                 </div>
                             </form>
                             <div id="mensaje"></div>

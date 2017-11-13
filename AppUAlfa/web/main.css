@@ -1,4 +1,4 @@
-@import url(font-awesome.min.css);
+@import url(assets/css/font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 
 /*
@@ -1257,7 +1257,7 @@
 				-ms-transition-delay: 0.25s;
 				transition-delay: 0.25s;
 				padding: 3rem 2rem;
-				max-height: 40rem;
+				/*max-height: 40rem;*/
 				overflow: hidden;
 			}
 

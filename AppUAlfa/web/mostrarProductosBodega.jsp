@@ -12,7 +12,41 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 
         <style>
-            
+            @media screen and (max-width:560px) {
+                #res {
+                    width: 70%;
+                    margin: auto;
+                    float: none;
+                }
+                #logo{
+                    padding-top: 10px;
+                    padding-bottom: 20px;
+                }
+                #perfilres{
+                    margin-top: -41px;
+                }
+                #cont{
+                    padding-bottom: 200px;
+                }
+                #header .content .inner {
+                    -moz-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+                    -webkit-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+                    -ms-transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+                    transition: max-height 0.75s ease, padding 0.75s ease, opacity 0.325s ease-in-out;
+                    -moz-transition-delay: 0.25s;
+                    -webkit-transition-delay: 0.25s;
+                    -ms-transition-delay: 0.25s;
+                    transition-delay: 0.25s;
+                    padding: 3rem 2rem;
+                    /*max-height: 40rem;*/
+                    overflow: visible;
+                }
+            }
+            @media screen and (max-width: 1500px) {
+                #cont{
+                    padding-bottom: 30px;
+                }
+            }
             @font-face
             {
                 font-family: 'carrito.ttf';
@@ -40,7 +74,7 @@
                 position: absolute;
                 margin: auto;
                 margin-left: -33px;
-                margin-top: -30px;
+                margin-top: -31px;
             }
 
 
@@ -65,8 +99,8 @@
             #div{
                 margin-bottom: 500px;
             }
-            
-            
+
+
             .row {
                 margin: 10px -16px;
             }
@@ -109,8 +143,36 @@
             img {
                 border-radius: 5px 5px 0 0;
             }
-            
+            .sin{
+                border-radius: 3px;
+            }
+            .sin:hover{
+                /*box-shadow: 2px 2px 5px #000000;*/
+                color: #000000;
+            }
+            #menu{
+                color: #999;
+            }
+
         </style>
+        <script>
+            $(document).ready(function () {
+                var elemento = $("#div");
+                var posicion = elemento.position();
+                console.log("left: " + posicion.left + ", top: " + posicion.top);
+                var div_alto = $("#div").height();
+                console.log(div_alto);
+            });
+
+            function move() {
+                var bt = document.getElementById('cont').offsetHeight;
+                console.log("Bottom: " + bt);
+                var parameter = "0 0 " + bt + "px 0";
+                console.log(parameter);
+                document.getElementById("div").style.padding = parameter;
+
+            }
+        </script>
     </head>
     <body>
 
@@ -130,7 +192,7 @@
             <header id="header">
                 <div class="logo" id="logo"></div>
                 <!--<div class="content" id="div">-->
-                <div class="content" style="padding-bottom: 20px;">
+                <div class="content" id="cont">
                     <div class="inner">
                         <div id="nombre"><h1>Tus Productos</h1></div>
                         <div id="div"><!--Llegada de los productos--></div>
@@ -138,15 +200,15 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="agregarProducto.jsp"><i class="fa fa-plus-circle"></i> Agregar Productos</a></li>
-                        <li><a href="mostrarTiendaVendedor.jsp"><i class="fa fa-arrow-circle-o-left"></i> Menu Principal</a></li>
-                        <li><a onclick='cerrarSesion()'><i class="fa fa-power-off"></i>  Cerrar Sesion</a></li>
+                        <li style="background-color: #087eac;" class="sin"><a href="agregarProducto.jsp"><i class="fa fa-plus-circle"></i> Agregar Productos</a></li>
+                        <li style="background-color: #fff" class="sin"><a href="mostrarTiendaVendedor.jsp" class="sin" id="menu"><i class="fa fa-arrow-circle-o-left"></i> Menu Principal</a></li>
+                        <li style="background-color: #e30020" class="sin"><a onclick='cerrarSesion()' style="cursor: alias"><i class="fa fa-power-off"></i>  Cerrar Sesion</a></li>
                     </ul>
                 </nav>
             </header>
             <!--Header-->
-            
-            
+
+
             <!-- Footer -->
             <footer id="footer" style="margin-top: 0px;">
                 <!--<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>-->

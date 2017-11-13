@@ -16,7 +16,6 @@
             @media screen and (max-width: 480px) {
 
 			div .content {
-				
 				padding-bottom: 200px;
 			}
                         #header .content .inner {
@@ -32,7 +31,9 @@
 				max-height: 40rem;
 				overflow: visible;
 			}
-                        
+                        .top{
+                            width: 200px;
+                        }
             }
             
             @font-face
@@ -129,7 +130,22 @@
             img {
                 border-radius: 5px 5px 0 0;
             }
-
+            .sin{
+                 border-radius: 3px;
+            }
+            .sin:hover{
+               /*box-shadow: 2px 2px 5px #000000;*/
+               color: #000000;
+            }
+            .top{
+                background-color: #087eac; 
+                width: 500px; 
+                margin: auto; 
+                border-radius: 5px; 
+                padding-top: 5px; 
+                margin-bottom: 10px;
+            }
+            
         </style>
     </head>
     <body>
@@ -151,7 +167,7 @@
             <header id="header">
                 <div class="content">
                     <div class="inner" id="in">
-                        <div id="nombre" style="margin-bottom: 50px;"><h1>Registro Producto</h1></div>
+                        <div id="nombre" style="margin-bottom: 50px;"><h1 style=" color: #e30020; opacity: 0.7;">Registro Producto</h1></div>
 
                         <!-- Contact -->
                         <article id="contact">
@@ -185,8 +201,8 @@
                                     <textarea name="ruta" id="imagen" rows="2"></textarea>
                                 </div>
                                 <ul class="actions">
-                                    <li><input type="submit" value="Agregar Producto" class="special" id="boton"/></li>
-                                    <li><input type="reset" value="Reset" /></li>
+                                    <li style="background-color: #087eac; padding-right: 0; margin-right: 10px;" class="sin"><input type="submit" value="Agregar Producto" id="boton"/></li>
+                                    <li style="background-color: #e30020" class="sin"><input type="reset" value="Reset" /></li>
                                 </ul>
                             </form>
                         </article>
