@@ -9,7 +9,7 @@
         <style>
             @media screen and (max-width:560px) {
                 #res {
-                    width: 70%;
+                    width: 90%;
                     margin: auto;
                     float: none;
                 }
@@ -20,6 +20,25 @@
                 #tiendas{
                 }
             }
+            
+            @media screen and (max-width:662px) {
+                div#bandera{
+                    width: 100%;
+                    height: 39px; 
+                    z-index: 2000;
+                    border: 2px solid #ffffff; /*Blanco*/
+                    border-radius: 3px;
+                    margin-top: 30px;
+                    display: none;
+                }
+            }
+            
+            @media screen and (min-width:662px) {
+                div#bandera2{
+                    display: none;
+                }
+            }
+            
             @font-face
             {
                 font-family: 'carrito.ttf';
@@ -62,14 +81,16 @@
             }
 
             h1 {
-
                 word-break: break-all;
                 font-family: 'carrito.ttf';
                 opacity: 1;
                 font-size: 1.75rem;
                 line-height: 1.4;
                 /*letter-spacing: 0.2rem;*/
-                color: #ffffff;
+                /*color: #999;*/
+                color: #555;
+                text-align: center;
+                margin: auto;
             }
 
             .row {
@@ -103,7 +124,6 @@
                 background-color: white;
                 box-shadow: 2px 2px 5px #999;
                 padding: 0px;
-
             }
             .content2 {
                 padding: 5px;
@@ -186,7 +206,58 @@
             #bg {
                 background: rgba(19, 21, 25, 0.5);
             }
-            
+            div#bandera{
+                width: 100%;
+                height: 39px; 
+                z-index: 2000;
+                border: 2px solid #ffffff; /*Blanco*/
+                border-radius: 3px;
+                margin-top: 30px;
+            }
+            div#rojo{
+                float: left;
+                width: 33.33%;
+                height: 100%;
+                background-color: #e30020;
+            }
+            div#blanco{
+                float: left;
+                width: 33.33%;
+                height: 100%;
+                background-color: #ffffff;
+            }
+            div#azul{
+                float: left;
+                width: 33.33%;
+                height: 100%;
+                background-color: #087eac;
+            }
+            div#bandera2{
+                width: 100%;
+                height: 117px; 
+                z-index: 2000;
+                border: 2px solid #ffffff; /*Blanco*/
+                border-radius: 3px;
+                margin-top: 30px;
+            }
+            div#rojo2{
+                float: left;
+                width: 100%;
+                height: 33.33%;
+                background-color: #e30020;
+            }
+            div#blanco2{
+                float: left;
+                width: 100%;
+                height: 33.33%;
+                background-color: #ffffff;
+            }
+            div#azul2{
+                float: left;
+                width: 100%;
+                height: 33.33%;
+                background-color: #087eac;
+            }
         </style>
         <script>
             jQuery(document).ready(function () {
@@ -208,9 +279,23 @@
         <!-- MAIN (Center website) -->
         <div class="main">
             <center><div id="logo"><img src="Pictures/AppuMartLogo.png" style="width: 30%; height: 30%; margin-top: -45px; margin-bottom: -40px;"></div></center>
+
             <hr>
-            <div id="bandera"><div id="rojo"></div><div id="blanco"></div><div id="azul"></div></div>
-            <h1 class="sticky">Nuestras Tiendas</h1>
+
+            <div id="bandera">
+                <div id="azul"></div>
+                <!--<div id="blanco"><center><img src="Pictures/AppuTexto.png" style="width: 45%"></center></div>-->
+                <div id="blanco"><h1>Nuestras Tiendas</h1></div>
+                <div id="rojo"></div>  
+            </div>
+            <div id="bandera2">
+                <div id="azul2"></div>
+                <!--<div id="blanco"><center><img src="Pictures/AppuTexto.png" style="width: 45%"></center></div>-->
+                <div id="blanco2"><h1>Nuestras Tiendas</h1></div>
+                <div id="rojo2"></div>  
+            </div>
+
+            <!--<h1 class="sticky">Nuestras Tiendas</h1>-->
             <div class="row" id="div">
             </div>
             <p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas tiendas por mostrar <i class="fa fa-exclamation-circle"></i></p>
