@@ -23,7 +23,7 @@
                 /*background-color: #f1f1f1;*/
                 /*font-family: 'carrito.ttf';*/
             }
-            
+
             .avatar{
                 width:150px;
                 height:150px;
@@ -58,24 +58,42 @@
                 -ms-transition: all 500ms ease-in-out;
                 -o-transition: all 500ms ease-in-out;
             }
-            
+
             #nombre2{
                 font-family: 'carrito.ttf';
             }
             .sin{
-                 border-radius: 3px;
+                border-radius: 3px;
             }
             .sin:hover{
-               /*box-shadow: 2px 2px 5px #000000;*/
-               color: #000000;
+                /*box-shadow: 2px 2px 5px #000000;*/
+                color: #000000;
             }
             #menu{
-                 color: #999;
+                color: #999;
             }
         </style>
+        <script>
+            function cerrarSesion() {
+                $.ajax({
+                    url: 'CerrarSesionServlet',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("Cerrando Sesion");
+                        window.location.href = "index.jsp";
+                    },
+                    error: function () {
+                    }
+                });
+
+
+            }
+            ;
+        </script>
     </head>
     <body>
-        
+
         <%HttpSession mySession = request.getSession();
             VendedorVO vo = (VendedorVO) mySession.getAttribute("vendedor");
         %>
@@ -84,7 +102,7 @@
         <%if (vo == null) {%>
         <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=index.jsp">
         <%}%>
-        
+
         <!-- Wrapper -->
         <div id="wrapper" style="padding-bottom: 0px">
 

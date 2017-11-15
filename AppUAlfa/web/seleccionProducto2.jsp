@@ -6,7 +6,6 @@
         <script type="text/javascript" src="seleccionProductoAjax.js"></script>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 
-
         <title id="xx"></title>
 
 
@@ -384,8 +383,9 @@
             <div class="row" id="div">
                 <!-- END GRID -->
             </div>
-            <p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas productos por mostrar <i class="fa fa-exclamation-circle"></i></p>
-
+            <!--<p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas productos por mostrar <i class="fa fa-exclamation-circle"></i></p>
+            -->
+            
             <hr style="margin-top: 20px">
 
             <div class="footer">
@@ -395,7 +395,7 @@
                     <span class="tooltiptext">Volver Al Menu Principal</span>
                 </div>
             </div>
-
+            
         </div>
         <!--WebSite Fin -->
     </body>

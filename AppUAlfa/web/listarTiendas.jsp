@@ -5,6 +5,7 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="listarTiendasAjax.js"></script>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="Botones.css" />
         <title>Tiendas AppuMart</title>
         <style>
             @media screen and (max-width:560px) {
@@ -20,7 +21,7 @@
                 #tiendas{
                 }
             }
-            
+
             @media screen and (max-width:662px) {
                 div#bandera{
                     width: 100%;
@@ -32,13 +33,13 @@
                     display: none;
                 }
             }
-            
+
             @media screen and (min-width:662px) {
                 div#bandera2{
                     display: none;
                 }
             }
-            
+
             @font-face
             {
                 font-family: 'carrito.ttf';
@@ -137,7 +138,7 @@
                 border-radius: 5px 5px 0 0;
             }
 
-            .footer {
+            /*.footer {
                 position: fixed;
                 left: 0;
                 bottom: 0;
@@ -145,7 +146,7 @@
                 background-color: red;
                 color: white;
                 text-align: center;
-            }
+            }*/
             .sticky {
                 position: -webkit-sticky;
                 position: sticky;
@@ -273,6 +274,24 @@
                 });
             });
         </script>
+        <script>
+            function cerrarSesion() {
+                $.ajax({
+                    url: 'CerrarSesionServlet',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("Cerrando Sesion");
+                        window.location.href = "index.jsp";
+                    },
+                    error: function () {
+                    }
+                });
+
+
+            }
+            ;
+        </script>
     </head>
     <body>
 
@@ -288,6 +307,7 @@
                 <div id="blanco"><h1>Nuestras Tiendas</h1></div>
                 <div id="rojo"></div>  
             </div>
+            <!--<center><button style="width: 100%;">Nuestras Tiendas</button></center>-->
             <div id="bandera2">
                 <div id="azul2"></div>
                 <!--<div id="blanco"><center><img src="Pictures/AppuTexto.png" style="width: 45%"></center></div>-->
@@ -295,13 +315,10 @@
                 <div id="rojo2"></div>  
             </div>
 
-            <!--<h1 class="sticky">Nuestras Tiendas</h1>-->
-            <div class="row" id="div">
-            </div>
-            <p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas tiendas por mostrar <i class="fa fa-exclamation-circle"></i></p>
+            <div class="row" id="div"></div>
+            <!--<p id="na" style="text-align: center;"><i class="fa fa-exclamation-circle"></i> No hay mas tiendas por mostrar <i class="fa fa-exclamation-circle"></i></p>-->
 
-
-            <div id="bg"></div>
+            <!--<div id="bg"></div>-->
             <hr style="margin-top: 20px">
 
             <div class="footer">
@@ -309,9 +326,9 @@
                 <img src="Pictures/AppuTexto.png" style="width: 30%; height: 30%; padding-top: 8px;">
             </div>
 
+            <center><button style="margin-top: 20px; background-color: #e30020; cursor: alias;" onclick="cerrarSesion()"><i class="fa fa-power-off"></i> Cerrar Sesion</button></center>
             <!-- END MAIN -->
         </div>
-
         <script>
             filterSelection("all")
             function filterSelection(c) {

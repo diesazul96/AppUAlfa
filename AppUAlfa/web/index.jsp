@@ -96,7 +96,7 @@
 
             function permiso() {
                 Notification.requestPermission();
-                alert("Cheking...");
+                //alert("Cheking...");
                 check();
             }
             ;
@@ -168,7 +168,7 @@
             ;
 
             function check() {
-                alert("Checking");
+                //alert("Checking");
                 if (Notification.permission === "granted") {
                     mostrarNotificacion();
                 }
