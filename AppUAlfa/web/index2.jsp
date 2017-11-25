@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Index Page</title>
+        <title>AppuMart</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -57,16 +57,16 @@
             <div class="box alt container">
                 <section class="feature left">
                     <!--<a href="#" class="image icon fa-signal"><img src="Pictures/Carrito2_1.png" width="200px" height="200px"></a>-->
-                    <a href="#" class="image icon fa-signal"><div id="Type2"><button class="button" style="font-size: 20px; background-color: #087eac">Usuario</button></div></a>
+                    <a href="http://localhost:8080/AppuMart/loginUsuario.jsp" class="image icon fa-signal"><div id="Type2"><button class="button" style="font-size: 20px; background-color: #087eac">Comprador</button></div></a>
                     <div class="content">
                         <!--<h3>Usuario</h3>-->
-                        <p>Para ingresar al sistema como un usuario, haga click en esta opcion.
+                        <p>Para ingresar al sistema como un comprador, haga click en esta opcion.
                             Aqui podra navegar en la variedad de tiendas que tenemos, observar y comprar los productos que estas tienen.</p>
                     </div>
                 </section>
                 <section class="feature right">
                     <!--<a href="#" class="image icon fa-code"><img src="Pictures/VendedorLogo.png"></a>-->
-                    <a href="#" class="image icon fa-code"><div id="Type"><button class="button" style="font-size: 20px; background-color: #e30020">Vendedor</button></div></a>
+                    <a href="http://localhost:8080/AppuMart/loginVendedor.jsp" class="image icon fa-code"><div id="Type"><button class="button" style="font-size: 20px; background-color: #e30020">Vendedor</button></div></a>
                     <div class="content">
                         <!--<h3>Vendedor</h3>-->
                         <p>Para ingresar al sistema como un vendedor, haga click en esta opcion.
